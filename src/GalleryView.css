@@ -1,0 +1,26 @@
+.gallery_container {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column; /* To align children vertically */
+    align-items: center;    /* Horizontally center children */
+    height: 100vh;          /* Takes the full viewport height */
+    text-decoration: none;
+}
+
+.gallery-item-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 10px 0;
+    width: 80%; /* Optional: You can set a specific width if required */
+    margin-left: 300px; 
+}
+
+/* This will make both controls be on the same row */
+.controls-container {
+    display: flex;
+    align-items: center; /* Vertically centers the items in case they have different heights */
+    gap: 10px; /* Provides a small space between the date input and the dropdown */
+    margin-bottom: 10px;
+}
