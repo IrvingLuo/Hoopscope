@@ -73,7 +73,7 @@ function SearchView({
         // console.log(stats_withTeam);
 
         const players_withTeams = sortedPlayers.map(player=>{
-          const theMacthedGame = stats_withTeam.find(stat=>stat.player.id == player.id);
+          const theMacthedGame = stats_withTeam.find(stat=>stat.player.id === player.id);
 
           if(theMacthedGame){
             return {...player, matchedGame:theMacthedGame };
@@ -94,7 +94,7 @@ function SearchView({
     };
   
     useEffect(() => {
-      if (query!="") {
+      if (query!=="") {
         fetchQueriedSortedPlayers()
       }else{
         setPlayersData([]);
@@ -123,8 +123,8 @@ function SearchView({
     // 3. Sort based on the height
     function sortByHeight(data) {
       return data.sort((a, b) => {
-          if(a.height_feet == undefined || a.height_inches == undefined)return 1;
-          if(b.height_feet == undefined || b.height_inches == undefined)return -1;
+          if(a.height_feet === undefined || a.height_inches === undefined)return 1;
+          if(b.height_feet === undefined || b.height_inches === undefined)return -1;
 
 
           // Convert height to total inches
@@ -140,12 +140,12 @@ function SearchView({
     function sortedByTeam(data){
       const temp = data.filter(d => {
        
-        if(selectedTeam_search == "")return true;
+        if(selectedTeam_search === "")return true;
         console.log("i am " + d.first_name +" " + d.last_name);
         console.log("d.id: ");
         console.log("selectedTeam_search");
         console.log(selectedTeam_search);
-        return selectedTeam_search == d.matchedGame.team.id || 0;
+        return selectedTeam_search === d.matchedGame.team.id || 0;
         
       })
       console.log("temp");

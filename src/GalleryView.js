@@ -52,8 +52,8 @@ function GalleryView(props) {
     // filter by teams
     function filterByTeam(){
         const filtered = gamesData.filter(gd => {
-            if(selectedTeam == "")return true;
-            return gd.home_team.id == selectedTeam || gd.visitor_team.id == selectedTeam 
+            if(selectedTeam === "")return true;
+            return gd.home_team.id === selectedTeam || gd.visitor_team.id === selectedTeam 
           })
           
           setDisplayData(filtered);

@@ -21,7 +21,7 @@ function GalleryItem({ game,index }) {
                 <span>H</span>
                 <img src={`/resource/${home_team.id}.png`} alt={home_team.abbreviation} />
                 <span>{home_team.name}</span>
-                <span className="score">{(home_team_score == 0)?'-':home_team_score}</span>
+                <span className="score">{(home_team_score === 0)?'-':home_team_score}</span>
             </div>
             <div className='middle'>
             <span>{formatDate(game.date)}</span>
@@ -32,7 +32,7 @@ function GalleryItem({ game,index }) {
                 <span>A</span>
                 <img src={`/resource/${visitor_team.id}.png`} alt={visitor_team.abbreviation} />
                 <span>{visitor_team.name}</span>
-                <span className="score">{(visitor_team_score == 0)?'-':visitor_team_score}</span>
+                <span className="score">{(visitor_team_score === 0)?'-':visitor_team_score}</span>
                 
             </div>
         </div>

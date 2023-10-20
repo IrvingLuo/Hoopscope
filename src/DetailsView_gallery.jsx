@@ -56,7 +56,7 @@ function DetailsView_gallery(props) {
 
         return dd.id === gameId;
     })
-    console.log("found the cur item index :" + curIndex);
+    // console.log("found the cur item index :" + curIndex);
     setIndex(curIndex);
     
 
@@ -151,9 +151,9 @@ const handleNext = () => {
                   <span>{displayData[index].home_team.name}</span>
               </div>
 
-              <span className="score">{(displayData[index].home_team_score == 0)?'-':displayData[index].home_team_score}</span>
+              <span className="score">{(displayData[index].home_team_score === 0)?'-':displayData[index].home_team_score}</span>
               <span>-</span>
-              <span className="score">{(displayData[index].visitor_team_score == 0)?'-':displayData[index].visitor_team_score}</span>
+              <span className="score">{(displayData[index].visitor_team_score === 0)?'-':displayData[index].visitor_team_score}</span>
 
               <div className='logo_name'>
                   <img src={`/resource/${displayData[index].visitor_team.id}.png`} alt={displayData[index].visitor_team.abbreviation} />
@@ -183,7 +183,7 @@ const handleNext = () => {
                 </thead>
                 <tbody>
                   {gameStats.filter(player => {
-                    return player.team.id == curData.home_team.id
+                    return player.team.id === curData.home_team.id
                   })
                   .map(player => (
                     <tr key={player.player.id}>
@@ -219,7 +219,7 @@ const handleNext = () => {
                 </thead>
                 <tbody>
                   {gameStats.filter(player => {
-                    return player.team.id == curData.visitor_team.id
+                    return player.team.id === curData.visitor_team.id
                   })
                   .map(player => (
                     <tr key={player.player.id}>

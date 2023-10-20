@@ -35,7 +35,7 @@ function DetailsView_player(props) {
 
         function findSearchListIndex(){
             const tempIndex = playersData.findIndex(dd => {
-                return dd.id == playerId;
+                return dd.id === playerId;
             });
             setSearchListIndex(tempIndex);
         }
