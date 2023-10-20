@@ -5,7 +5,7 @@ import axios from 'axios';
 import './DetailsView_gallery.css';
 import PropTypes from 'prop-types';
 
-function DetailsView_gallery(props) {
+function DetailsViewGallery(props) {
   const {displayData, selectedDate} = props
   const { id } = useParams();
   console.log("cur DetailView's id");
@@ -259,7 +259,7 @@ const handleNext = () => {
 
 
 
-DetailsView_gallery.propTypes = {
+DetailsViewGallery.propTypes = {
   displayData: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -282,4 +282,4 @@ DetailsView_gallery.propTypes = {
 
 
 
-export default DetailsView_gallery;
+export default DetailsViewGallery;

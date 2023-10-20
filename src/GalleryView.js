@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import axios from 'axios';
 import GalleryItem from './GalleryItem';
 import './GalleryView.css'
@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 function GalleryView(props) {
     const {
       selectedDate, setSelectedDate, gamesData, setGamesData,
-      displayData, setDisplayData, teams,setTeams, selectedTeam, setSelectedTeam
+      displayData, setDisplayData, teams, selectedTeam, setSelectedTeam
     } = props;
 
     // useEffect(() => {
@@ -16,14 +16,29 @@ function GalleryView(props) {
     // }, []);
 
     useEffect(() => {
+        const fetchGamesOnDate = async () => {
+            try {
+                let apiUrl = `https://www.balldontlie.io/api/v1/games?start_date=${selectedDate}&end_date=${selectedDate}&dates[]=${selectedDate}`;
+                
+                const response = await axios.get(apiUrl);
+                // console.log("response:")
+                // console.log(response)
+                setGamesData(response.data.data);
+                setDisplayData(response.data.data)
+    
+            } catch (error) {
+                console.error("Error fetching games data:", error);
+            }
+        };
         
       fetchGamesOnDate();
-      // then filter by the team
-      filterByTeam();
+
+      
+    //   filterByTeam();
       
       
         
-    }, [selectedDate]); // Note!!
+    }, [selectedDate, gamesData, selectedTeam, setDisplayData, setGamesData]); // Note!!
 
     // const fetchTeams = async () => {
     //     try {
@@ -34,40 +49,40 @@ function GalleryView(props) {
     //     }
     // };
 
-    const fetchGamesOnDate = async () => {
-        try {
-            let apiUrl = `https://www.balldontlie.io/api/v1/games?start_date=${selectedDate}&end_date=${selectedDate}&dates[]=${selectedDate}`;
+    // const fetchGamesOnDate = async () => {
+    //     try {
+    //         let apiUrl = `https://www.balldontlie.io/api/v1/games?start_date=${selectedDate}&end_date=${selectedDate}&dates[]=${selectedDate}`;
             
-            const response = await axios.get(apiUrl);
-            // console.log("response:")
-            // console.log(response)
-            setGamesData(response.data.data);
-            setDisplayData(response.data.data)
+    //         const response = await axios.get(apiUrl);
+    //         // console.log("response:")
+    //         // console.log(response)
+    //         setGamesData(response.data.data);
+    //         setDisplayData(response.data.data)
 
-        } catch (error) {
-            console.error("Error fetching games data:", error);
-        }
-    };
+    //     } catch (error) {
+    //         console.error("Error fetching games data:", error);
+    //     }
+    // };
 
     // filter by teams
-    function filterByTeam(){
-        const filtered = gamesData.filter(gd => {
-            if(selectedTeam === "")return true;
-            return gd.home_team.id === selectedTeam || gd.visitor_team.id === selectedTeam 
-          })
+    // function filterByTeam(){
+    //     const filtered = gamesData.filter(gd => {
+    //         if(selectedTeam === "")return true;
+    //         return gd.home_team.id === selectedTeam || gd.visitor_team.id === selectedTeam 
+    //       })
           
-          setDisplayData(filtered);
+    //       setDisplayData(filtered);
     
-    }
+    // }
    
 
     
 
     // change everytime I select a team to filter
-    useEffect(() => {  
-        filterByTeam();
+    // useEffect(() => {  
+    //     filterByTeam();
         
-    }, [selectedTeam,gamesData]); // Note!!
+    // }, [selectedTeam,gamesData]); // Note!!
 
     
 

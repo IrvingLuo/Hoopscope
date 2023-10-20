@@ -6,7 +6,7 @@ import './DetailsView_player.css'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-function DetailsView_player(props) {
+function DetailsViewPlayer(props) {
     const { id } = useParams(); // Get the id from the URL
     const {season, playersData} = props; // players of searchList
     const [playerGameData, setPlayerData] = useState([]);
@@ -41,7 +41,7 @@ function DetailsView_player(props) {
         }
         findSearchListIndex();
         fetch_SeasonPlayerData();
-    }, [playerId]);
+    }, [playerId, playersData, season]);
 
     // sort the playerData by the score 
     
@@ -103,10 +103,10 @@ const handleNext = () => {
 
             <div className="navigation-buttons">
                 <button onClick={handlePrev} className='navButton leftButton'>
-                    <img src='/resource/left_arrow.png'></img>
+                    <img src='/resource/left_arrow.png' alt = 'left_arrow'></img>
                     </button>
                 <button onClick={handleNext} className='navButton rightButton'>
-                    <img src='/resource/right_arrow.png'></img>
+                    <img src='/resource/right_arrow.png' alt = 'right_arrow'></img>
                 </button>
             </div>
 
@@ -205,7 +205,7 @@ const handleNext = () => {
 }
 
 
-DetailsView_player.propTypes = {
+DetailsViewPlayer.propTypes = {
     season: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
@@ -226,5 +226,5 @@ DetailsView_player.propTypes = {
     ).isRequired
 };
 
-export default DetailsView_player;
+export default DetailsViewPlayer;
 

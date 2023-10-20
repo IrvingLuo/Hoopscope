@@ -1,18 +1,18 @@
-import logo from './logo.svg';
+
 import './App.css';
 import{
   BrowserRouter as Router,
   Route,
   Routes,
-  Link, Outlet } from "react-router-dom"
+  Link } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
 
 import GalleryView from './GalleryView';
 import SearchView from './SearchView';
-import DetailsView_gallery from './DetailsView_gallery';
+import DetailsViewGallery from './DetailsView_gallery';
 import NotFound from './NotFound';
 import axios from 'axios';
-import DetailsView_player from './DetailsView_player';
+import DetailsViewPlayer from './DetailsView_player';
 import PropTypes from 'prop-types';
 
 
@@ -82,7 +82,7 @@ function App() {
 
             />} />
           <Route path="/DetailsView_player/:id" 
-                  element={<DetailsView_player
+                  element={<DetailsViewPlayer
                     season = {season}
                     playersData = {playersData}
                    />} />
@@ -103,7 +103,7 @@ function App() {
 
                   />} />
           <Route path="/DetailsView_gallery/:id" 
-                  element={<DetailsView_gallery
+                  element={<DetailsViewGallery
                   displayData = {displayData}
                   selectedDate = {selectedDate}
                   />} /> {/* Note the :id parameter */}
@@ -135,7 +135,7 @@ SearchView.propTypes = {
 };
 
 // PropTypes for DetailsView_player
-DetailsView_player.propTypes = {
+DetailsViewPlayer.propTypes = {
   season: PropTypes.string.isRequired,
   playersData: PropTypes.array.isRequired
 };
@@ -155,7 +155,7 @@ GalleryView.propTypes = {
 };
 
 // PropTypes for DetailsView_gallery
-DetailsView_gallery.propTypes = {
+DetailsViewGallery.propTypes = {
   displayData: PropTypes.array.isRequired,
   selectedDate: PropTypes.string.isRequired
 };
