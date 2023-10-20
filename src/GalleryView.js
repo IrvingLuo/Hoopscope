@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 function GalleryView(props) {
     const {
-      selectedDate, setSelectedDate, gamesData, setGamesData,
+      selectedDate, setSelectedDate,
       displayData, setDisplayData, teams, selectedTeam, setSelectedTeam
     } = props;
 
@@ -23,7 +23,7 @@ function GalleryView(props) {
                 const response = await axios.get(apiUrl);
                 // console.log("response:")
                 // console.log(response)
-                setGamesData(response.data.data);
+               
                 setDisplayData(response.data.data)
     
             } catch (error) {
@@ -38,7 +38,7 @@ function GalleryView(props) {
       
       
         
-    }, [selectedDate, gamesData, selectedTeam, setDisplayData, setGamesData]); // Note!!
+    }, [selectedDate,setDisplayData]); // Note!!
 
     // const fetchTeams = async () => {
     //     try {

@@ -51,7 +51,7 @@ function App() {
   };
 
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router >
       <div className='App'>
         <nav className='nav'>
           <p>🏀</p>

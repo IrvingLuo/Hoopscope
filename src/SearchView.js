@@ -1,6 +1,6 @@
 import './SearchView.css';
 
-import {  useEffect } from 'react';
+import {  useEffect, useCallback} from 'react';
 import axios from 'axios';
 import { PlayerList } from './PlayerList';
 import PropTypes from 'prop-types';
@@ -15,84 +15,14 @@ function SearchView({
 
    
     console.log(query);
-    function handleQuery(e){
-      setQuery(e.target.value)
-    }
-    function handleSeasonChange(e) {
+    // Using useCallback for handleQuery
+    const handleQuery = useCallback((e) => {
+      setQuery(e.target.value);
+    }, [setQuery]);
+    // Using useCallback for handleSeasonChange
+    const handleSeasonChange = useCallback((e) => {
       setSeason(e.target.value);
-  }
-    // fetch all players related to query
-    // 
-    // const fetchQueriedSortedPlayers = async () => {
-    //   try {
-
-        
-    //     const playersRes = await axios.get(`https://www.balldontlie.io/api/v1/players?search=${query}&page=0&per_page=40`);
-    //     const players = playersRes.data.data;
-    //     // Fetch averages for the fetched players
-    //     const playerIds = players.map(player => player.id);
-    //     const playerIdsQueryString = playerIds.map(id => `player_ids[]=${id}`).join('&');
-    //     // console.log("playerIdsQueryString: ");
-    //     // console.log(playerIdsQueryString);
-    //     const averagesRes = await axios.get(`https://www.balldontlie.io/api/v1/season_averages?season=${season}&${playerIdsQueryString}`);  
-    //     const averages = averagesRes.data.data;
-       
-
-        
-
-    //     // Combine player data with their respective averages
-    //     const processedPlayers = players.map(player=>{
-    //       const playersAverage = averages.find(average=>average.player_id === player.id);
-      
-    //       if(playersAverage){
-    //         return {...player, averages: playersAverage, playInSelectedSeason: true };
-    //       }else{
-    //         return {...player, playInSelectedSeason: false};
-    //       }
-
-    //   })
-    //   // then do the sorting
-        
-    //     let sortedPlayers = sortByAveragesPresence(processedPlayers);
-    //     if (sortType === 'ppg') {
-    //       sortedPlayers = sortByPPG(sortedPlayers);
-    //   } else if (sortType === 'height') {
-    //       sortedPlayers = sortByHeight(sortedPlayers);
-    //   }
-      
-     
-    //     sortedPlayers = sortedByTeam(sortedPlayers);
-        
-
-    //     // try to find the team for the player in given season
-    //     const sortedPlayerIds = sortedPlayers.map(player => player.id);
-    //     const sortedPlayerIdsQueryString = sortedPlayerIds.map(id => `player_ids[]=${id}`).join('&');
-    //     const statsRes = await axios.get(`https://www.balldontlie.io/api/v1/stats?seasons[]=${season}&per_page=80&${sortedPlayerIdsQueryString}`);  
-    //     const stats_withTeam = statsRes.data.data;
-    //     // console.log("stats_withTeam:  ");
-    //     // console.log(stats_withTeam);
-
-    //     const players_withTeams = sortedPlayers.map(player=>{
-    //       const theMacthedGame = stats_withTeam.find(stat=>stat.player.id === player.id);
-
-    //       if(theMacthedGame){
-    //         return {...player, matchedGame:theMacthedGame };
-    //       }else{
-    //         return player;
-    //       }
-    //     })
-        
-
-    //     setPlayersData(players_withTeams);
-
-
-        
-        
-    //   } catch (error) {
-    //     console.error("Error fetching sortedPlayers:", error);
-    //   }
-    // };
-  
+    }, [setSeason]);
     useEffect(() => {
       const fetchQueriedSortedPlayers = async () => {
         try {
