@@ -25,7 +25,7 @@ export const PlayerList = ({data, season_data}) => {
                             {player.first_name} {player.last_name}
                         </div>
                         <div className="playerTeam">
-                            <img src={`/resource/${(player?.matchedGame)?player?.matchedGame
+                            <img src={`${base}/resource/${(player?.matchedGame)?player?.matchedGame
 ?.team?.id : player.team.id}.png`} alt="player_team_givenseason"/>
                             <span>{(player?.matchedGame)?player?.matchedGame
 ?.team?.abbreviation : "N/A"}</span>

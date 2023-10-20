@@ -150,11 +150,11 @@ const handleNext = () => {
 
      
         <button className="navButton leftButton" onClick={handlePrev} >
-          <img src='/resource/left_arrow.png' alt = 'left_arrow'></img>
+          <img src='${base}/resource/left_arrow.png' alt = 'left_arrow'></img>
         </button>
 
         <button className="navButton rightButton" onClick={handleNext} >
-          <img src='/resource/right_arrow.png'alt = 'right_arrow'></img>
+          <img src='${base}/resource/right_arrow.png'alt = 'right_arrow'></img>
         </button>
 
 
@@ -170,7 +170,7 @@ const handleNext = () => {
               <span className="score">{(displayData[index].visitor_team_score === 0)?'-':displayData[index].visitor_team_score}</span>
 
               <div className='logo_name'>
-                  <img src={`/resource/${displayData[index].visitor_team.id}.png`} alt={displayData[index].visitor_team.abbreviation} />
+                  <img src={`${base}/resource/${displayData[index].visitor_team.id}.png`} alt={displayData[index].visitor_team.abbreviation} />
                   <span>{displayData[index].visitor_team.name}</span>
               </div>
           </div>
