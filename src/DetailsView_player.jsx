@@ -183,7 +183,7 @@ const handleNext = () => {
                         <td>{curGame.fg_pct || 0}</td>
                         <td>{curGame.fg3_pct || 0}</td>
                         <td></td>
-                        <td><img src={`/resource/${curGame.team.id === curGame.game.home_team_id ? curGame.game.visitor_team_id : curGame.game.home_team_id}.png`} alt={curGame?.team?.name} /></td>
+                        <td><img src={`${base}/resource/${curGame.team.id === curGame.game.home_team_id ? curGame.game.visitor_team_id : curGame.game.home_team_id}.png`} alt={curGame?.team?.name} /></td>
                         <td>{curGame.game.date ? formatDate(curGame.game.date) : 0}</td>
 
                     </tr>
