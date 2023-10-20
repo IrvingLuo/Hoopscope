@@ -160,7 +160,7 @@ const handleNext = () => {
         
           <div className='Team_board'>
               <div className='logo_name'>
-                  <img src={`../resource/${displayData[index].home_team.id}.png`} alt={displayData[index].home_team.abbreviation} />
+                  <img src={`/resource/${displayData[index].home_team.id}.png`} alt={displayData[index].home_team.abbreviation} />
                   <span>{displayData[index].home_team.name}</span>
               </div>
 
@@ -169,7 +169,7 @@ const handleNext = () => {
               <span className="score">{(displayData[index].visitor_team_score === 0)?'-':displayData[index].visitor_team_score}</span>
 
               <div className='logo_name'>
-                  <img src={`../resource/${displayData[index].visitor_team.id}.png`} alt={displayData[index].visitor_team.abbreviation} />
+                  <img src={`/resource/${displayData[index].visitor_team.id}.png`} alt={displayData[index].visitor_team.abbreviation} />
                   <span>{displayData[index].visitor_team.name}</span>
               </div>
           </div>

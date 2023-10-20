@@ -103,15 +103,15 @@ const handleNext = () => {
 
             <div className="navigation-buttons">
                 <button onClick={handlePrev} className='navButton leftButton'>
-                    <img src='../resource/left_arrow.png' alt = 'left_arrow'></img>
+                    <img src='/resource/left_arrow.png' alt = 'left_arrow'></img>
                     </button>
                 <button onClick={handleNext} className='navButton rightButton'>
-                    <img src='../resource/right_arrow.png' alt = 'right_arrow'></img>
+                    <img src='/resource/right_arrow.png' alt = 'right_arrow'></img>
                 </button>
             </div>
 
             <div className='playerAbout'>
-                <img src={`../resource/${playerGameData[0]?.team?.id}.png`} alt={playerGameData[0]?.team?.name} />
+                <img src={`/resource/${playerGameData[0]?.team?.id}.png`} alt={playerGameData[0]?.team?.name} />
                 <div>
                     <span>{playerGameData[0]?.team?.full_name}</span>
                     <div className='playerName'>
