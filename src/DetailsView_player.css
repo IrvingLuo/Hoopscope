@@ -1,0 +1,102 @@
+.Whole {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; /* Horizontally centers the child content */
+    align-items: center;     /* Vertically centers the child content */
+    height: 100vh;           /* Takes up the full height of the viewport */
+    margin-bottom: 20px;
+}
+
+.playerAbout {
+    display: flex;
+    flex-direction: column;   /* Organize the children vertically */
+    align-items: center;      /* Center the content horizontally */
+    text-align: center;       /* Center the text of direct children */
+    /* add any other styles specific to the playerAbout as needed */
+}
+.playerAbout img {
+    width: 200px;    /* Adjust this to your desired width */
+    height: 200px;   /* Adjust this to your desired height */
+    object-fit: cover; /* This ensures that the image covers the dimensions without distorting */
+}
+
+
+.playerName{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.playerName h1:first-child {
+    margin-right: 15px; /* Adjust this value to your preference */
+}
+
+.seasonData {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 2px solid #000; /* Adding a vertical line between each seasonData */
+    padding-right: 10px; /* Adding some spacing to the right of the content and the vertical line */
+    margin-right: 10px; /* Adding some spacing between the vertical line and the next seasonData */
+}
+
+.seasonData:last-child {
+    border-right: none; /* Removing the border from the last seasonData */
+}
+
+.seasonAverage {
+    display: flex;
+    flex-direction: row;
+}
+
+
+ /* seasomGames */
+
+.SeasonGames {
+    max-height: 400px; /* Adjust this value based on your requirement */
+    overflow-y: auto; /* This makes it scrollable vertically when content overflows */
+    width: 70%;
+    padding: 30px; /* Adds some spacing around the table */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for a better look */
+    border: 1px solid #e0e0e0; 
+    border-radius: 50px;
+    margin-bottom: 90px;
+    
+}
+.SeasonGames td {
+    padding: 8px 20px;  /* 8px for vertical padding (top & bottom), 20px for horizontal padding (left & right) */
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    width: 10%;  /* adjust this value as per your requirement, this is just an example */
+}
+
+
+.SeasonGames table {
+    width: 100%; /* Makes sure the table takes the full width of the container */
+    border-collapse: collapse; /* Removes any spacing between the table cells */
+    z-index: 1;
+}
+
+.SeasonGames th, .SeasonGames td {
+    padding: 8px 12px; /* Adds spacing inside the cells */
+    border-bottom: 1px solid #ddd; /* Adds a light border at the bottom of each cell */
+    text-align: center; /* Center aligns the content */
+}
+
+.SeasonGames tr:hover {
+    background-color: #f5f5f5; /* Optional: Highlights the row when hovered */
+}
+
+.SeasonGames th {
+    background-color: #f2f2f2; /* Solid background color */
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+
+
+
+
+
+
+

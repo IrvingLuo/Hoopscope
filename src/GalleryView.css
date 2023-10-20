@@ -1,10 +1,14 @@
 .gallery_container {
-    padding-top: 5px;
+    padding-top: 50px;
     display: flex;
     flex-direction: column; /* To align children vertically */
     align-items: center;    /* Horizontally center children */
     height: 100vh;          /* Takes the full viewport height */
     text-decoration: none;
+    background-color: #d4d4d4;
+    
+    
+    
 }
 
 .gallery-item-container {
@@ -19,8 +23,64 @@
 
 /* This will make both controls be on the same row */
 .controls-container {
+    right: 100px;
     display: flex;
-    align-items: center; /* Vertically centers the items in case they have different heights */
+    justify-content: flex-end;
+    flex-direction: row;
+    align-items:flex-end; /* Vertically centers the items in case they have different heights */
     gap: 10px; /* Provides a small space between the date input and the dropdown */
     margin-bottom: 10px;
+}
+/* date */
+.controls-container input[type="date"] {
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.controls-container input[type="date"]:focus {
+    border-color: #4C7B9F;
+    outline: none;
+}
+
+/* dropdown */
+.controls-container select {
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    transition: border-color 0.3s ease-in-out;
+    appearance: none;  /* Removes default arrow in some browsers */
+    -webkit-appearance: none; /* Removes default arrow in Webkit browsers */
+    -moz-appearance: none; /* Removes default arrow in Mozilla browsers */
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+.controls-container select:focus {
+    border-color: #4C7B9F;
+    outline: none;
+}
+
+/* Adding a custom arrow to the dropdown for a more modern look */
+.controls-container select::-ms-expand {
+    display: none; /* Removes default arrow in IE */
+}
+
+.controls-container select::after {
+    content: '\25BC'; /* Unicode arrow down */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Makes sure the pseudo element doesn't interfere with the dropdown's functionality */
+}
+
+.NoSchedule_words{
+    font-size: 24px; /* Adjust this value as per your preference */
+    color: #333;    /* Optional: Set a desired text color */
+    padding: 20px; 
+    
 }

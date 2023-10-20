@@ -1,38 +1,79 @@
-/* Basic Table Styles */
 table {
     width: 70%;
-    border-collapse: collapse; /* ensures there are no gaps between table cells */
+    border-collapse: collapse;
     margin-top: 20px;
+
+
 }
 
 th, td {
-    padding: 8px 15px; /* padding inside each table cell */
- 
+    padding: 8px 15px;
     text-align: left;
+    border-radius: 2px;
 }
 
 th {
-    background-color: #ffffff; /* light gray background for headers */
-    font-weight: bold; /* makes the header texts bold */
+    background-color: #ffffff;
+    font-weight: bold;
     z-index: -1;
+    
 }
 
-tr:hover {
-    background-color: #f5f5f5; /* light gray background when hovering over a row */
+/* Assigning width percentages to the table headers */
+th:nth-child(1) { width: 33%; }  /* PLAYER */
+th:nth-child(2) { width: 22%; }  /* TEAM(Recent) */
+th:nth-child(3) { width: 23%; }  /* PPG */
+th:nth-child(4) { width: 16%; }  /* HEIGHT */
+
+.playerList {
+    width: 70%; /* Match the table width */
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px; /* Space between the table and the playerList */
 }
 
-/* Other styles remain unchanged... */
-
-/* Basic hover effect for enlarging the row slightly */
-tr:hover {
-    transform: scale(1.05); /* enlarges the row by 5% */
-    background-color: #f5f5f5; /* light gray background when hovering over a row */
-    z-index: 1; /* ensures the hovered row is above the others */
-    transition: transform 0.3s ease; /* smooth transformation over 0.3 seconds */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* a subtle shadow for depth */
+.playerRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%; /* Make the player row take the full width of its parent */
+    border: 1px solid #f0efef; /* Add a border to distinguish between rows */
+    border-radius: 10px;
+    padding: 8px 3px 8px 15px; /* Add vertical padding for better aesthetics */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Add transition for box-shadow and background-color too */
+    cursor: pointer; /* Make it apparent that this row is clickable */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    background-color: #f0efef;
 }
 
-/* Ensure the effect doesn't abruptly disappear when no longer hovering */
-tr {
-    transition: transform 0.3s ease;
+.playerRow:hover {
+    transform: scale(1.05);    /* Enlarge the row slightly when hovered */
+    z-index: 1;               /* Make sure the enlarged row appears above its neighbors */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Enhanced shadow for more depth on hover */
+    background-color: #f7f7f7; /* Slight change in background color to give feedback on hover */
+}
+
+/* Assigning width percentages to the player data elements to match the table headers */
+.playerName   { width: 40%; }
+.playerTeam   { width: 20%; }
+.playerPPG    { width: 25%; }
+.playerHeight { width: 15%; }
+
+.playerTeam{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 60px;
+}
+.playerTeam span{
+    margin-left: 10px;
+}
+
+.playerPPG{
+    margin-right: 50px;
+    margin-top: 25px;
+}
+.playerHeight{
+    margin-right: 0px;
+    margin-top: 25px;
 }
