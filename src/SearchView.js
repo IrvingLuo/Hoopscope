@@ -61,7 +61,7 @@ function SearchView({
       
   
           
-          const playersRes = await axios.get(`https://www.balldontlie.io/api/v1/players?search=${query}&page=0&per_page=32`);
+          const playersRes = await axios.get(`https://www.balldontlie.io/api/v1/players?search=${query}&per_page=40`);
           const players = playersRes.data.data;
           // Fetch averages for the fetched players
           const playerIds = players.map(player => player.id);
@@ -101,7 +101,7 @@ function SearchView({
           // try to find the team for the player in given season
           const sortedPlayerIds = sortedPlayers.map(player => player.id);
           const sortedPlayerIdsQueryString = sortedPlayerIds.map(id => `player_ids[]=${id}`).join('&');
-          const statsRes = await axios.get(`https://www.balldontlie.io/api/v1/stats?seasons[]=${season}&per_page=60&${sortedPlayerIdsQueryString}`);  
+          const statsRes = await axios.get(`https://www.balldontlie.io/api/v1/stats?seasons[]=${season}&per_page=50&${sortedPlayerIdsQueryString}`);  
           const stats_withTeam = statsRes.data.data;
           // console.log("stats_withTeam:  ");
           // console.log(stats_withTeam);

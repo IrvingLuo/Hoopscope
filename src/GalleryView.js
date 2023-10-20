@@ -21,24 +21,32 @@ function GalleryView(props) {
                 let apiUrl = `https://www.balldontlie.io/api/v1/games?start_date=${selectedDate}&end_date=${selectedDate}&dates[]=${selectedDate}`;
                 
                 const response = await axios.get(apiUrl);
+                const gamesToday = response.data.data;
                 // console.log("response:")
                 // console.log(response)
-               
-                setDisplayData(response.data.data)
+                const games = filterByTeam(gamesToday);
+                setDisplayData(games);
     
             } catch (error) {
                 console.error("Error fetching games data:", error);
             }
         };
+        // filter by team from dropList
+        function filterByTeam(Data){
+            const filteredGame = Data.filter(gd => {
+                if(selectedTeam === "")return true;
+               
+                return gd.home_team.id === parseInt(selectedTeam) || gd.visitor_team.id === parseInt(selectedTeam);
+              })
+              
+              return filteredGame;
         
-      fetchGamesOnDate();
-
-      
-    //   filterByTeam();
-      
-      
+        }
+       
         
-    }, [selectedDate,setDisplayData]); // Note!!
+      fetchGamesOnDate();  
+        
+    }, [selectedDate, selectedTeam, setDisplayData]); // Note!!
 
     // const fetchTeams = async () => {
     //     try {
@@ -65,16 +73,7 @@ function GalleryView(props) {
     // };
 
     // filter by teams
-    // function filterByTeam(){
-    //     const filtered = gamesData.filter(gd => {
-    //         if(selectedTeam === "")return true;
-    //         return gd.home_team.id === selectedTeam || gd.visitor_team.id === selectedTeam 
-    //       })
-          
-    //       setDisplayData(filtered);
     
-    // }
-   
 
     
 
