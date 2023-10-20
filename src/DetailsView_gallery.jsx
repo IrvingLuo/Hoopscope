@@ -1,4 +1,4 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -28,20 +28,20 @@ function DetailsView_gallery(props) {
   
   // Warning: change of gameId =>cchangee of index
   // get the sorted list of player based on the gameId and dates
-  const fetchData = async () => {
-    try {
-      console.log("inside fetch data");
-      const response = await axios.get(`https://www.balldontlie.io/api/v1/stats?dates=${selectedDate}&game_ids[]=${gameId}&per_page=30`);
-      console.log("response: ");
-      console.log(response)
-      const sortedStats = response.data.data.sort((a, b) => b.pts - a.pts);
-      // console.log("sorted data");
-      // console.log(sortedStats);
-      setGameStats(sortedStats);
-    } catch (error) {
-      console.error("Error fetching game stats data:", error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     console.log("inside fetch data");
+  //     const response = await axios.get(`https://www.balldontlie.io/api/v1/stats?dates=${selectedDate}&game_ids[]=${gameId}&per_page=30`);
+  //     console.log("response: ");
+  //     console.log(response)
+  //     const sortedStats = response.data.data.sort((a, b) => b.pts - a.pts);
+  //     // console.log("sorted data");
+  //     // console.log(sortedStats);
+  //     setGameStats(sortedStats);
+  //   } catch (error) {
+  //     console.error("Error fetching game stats data:", error);
+  //   }
+  // };
 
   
 
@@ -59,11 +59,24 @@ function DetailsView_gallery(props) {
     // console.log("found the cur item index :" + curIndex);
     setIndex(curIndex);
     
-
+    const fetchData = async () => {
+      try {
+        console.log("inside fetch data");
+        const response = await axios.get(`https://www.balldontlie.io/api/v1/stats?dates=${selectedDate}&game_ids[]=${gameId}&per_page=30`);
+        console.log("response: ");
+        console.log(response)
+        const sortedStats = response.data.data.sort((a, b) => b.pts - a.pts);
+        // console.log("sorted data");
+        // console.log(sortedStats);
+        setGameStats(sortedStats);
+      } catch (error) {
+        console.error("Error fetching game stats data:", error);
+      }
+    };
     fetchData();
 
 
-  },[gameId]);
+  },[gameId,displayData, index, selectedDate]); // add iindex, displayData, selectedDate
 
   
 
@@ -71,7 +84,7 @@ function DetailsView_gallery(props) {
   // get the current data for conveninece
   useEffect(()=>{
     setCurData(displayData[index]);
-  },[index])
+  },[index,displayData]) // add displayData
 
   // next DetailsView
   const handlePrev = () => {
@@ -100,14 +113,14 @@ const handleNext = () => {
 
   // debug
   useEffect(() => {
-    console.log("Start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    console.log("index of current item")
-    console.log(index);
-    console.log("stats of the game")
-    console.log(gameStats);
-    console.log("displayData");
-    console.log(displayData);
-    console.log("END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    // console.log("Start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    // console.log("index of current item")
+    // console.log(index);
+    // console.log("stats of the game")
+    // console.log(gameStats);
+    // console.log("displayData");
+    // console.log(displayData);
+    // console.log("END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     
     
@@ -136,11 +149,11 @@ const handleNext = () => {
 
      
         <button className="navButton leftButton" onClick={handlePrev} >
-          <img src='/resource/left_arrow.png'></img>
+          <img src='/resource/left_arrow.png' alt = 'left_arrow'></img>
         </button>
 
         <button className="navButton rightButton" onClick={handleNext} >
-          <img src='/resource/right_arrow.png'></img>
+          <img src='/resource/right_arrow.png'alt = 'right_arrow'></img>
         </button>
 
 
