@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './DetailsView_gallery.css';
 import PropTypes from 'prop-types';
+import { base } from './utils';
 
 function DetailsViewGallery(props) {
   const {displayData, selectedDate} = props
