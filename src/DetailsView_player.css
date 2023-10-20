@@ -73,7 +73,7 @@
 .SeasonGames table {
     width: 100%; /* Makes sure the table takes the full width of the container */
     border-collapse: collapse; /* Removes any spacing between the table cells */
-    z-index: 1;
+    
 }
 
 .SeasonGames th, .SeasonGames td {
@@ -88,9 +88,30 @@
 
 .SeasonGames th {
     background-color: #f2f2f2; /* Solid background color */
-    position: sticky;
+  
     top: 0;
-    z-index: 2;
+   
+}
+.leftButton{
+    position: absolute;
+    top: 720px;
+    left: 190px;
+    z-index: 10;
+ 
+}
+.leftButton img{
+  width:20px;
+  height: 20px;
+  z-index: 10;
+}
+.rightButton{
+    position: absolute;
+    top: 720px;
+    right: 190px;
+}
+.rightButton img{
+  width:30px;
+  height: 30px;
 }
 
 

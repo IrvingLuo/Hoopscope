@@ -56,7 +56,7 @@
     border-radius: 10px;
     width: 55%; /* adjust width as needed */
     margin-bottom: 20px;
-    z-index: 3;
+   
     
 }
 
@@ -161,28 +161,31 @@
     
     background-color: #fff;
     border: none;
-    border-radius: 50%;  /* circular button */
+    border-radius: 30%;  /* circular button */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* shadow for depth */
     font-size: 24px;
     cursor: pointer;
-    z-index: 10;  /* keep the button above other elements */
+   
     transition: transform 0.3s ease-in-out;  /* transition for the hover effect */
 }
-.leftButton{
+.leftButton_gallery{
     position: absolute;
-    top: 170px;
-    left: 300px;
+    top: 570px;
+    left: 210px;
+    z-index: 10;
+ 
 }
-.leftButton img{
+.leftButton_gallery img{
   width:20px;
   height: 20px;
+  z-index: 10;
 }
-.rightButton{
+.rightButton_gallery{
     position: absolute;
-    top: 170px;
-    right: 260px;
+    top: 570px;
+    right: 220px;
 }
-.rightButton img{
+.rightButton_gallery img{
   width:30px;
   height: 30px;
 }

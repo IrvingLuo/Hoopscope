@@ -2,6 +2,7 @@ import React from 'react';
 import './GalleryItem.css'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { base } from './utils';
 function GalleryItem({ game,index }) {
     const { home_team, home_team_score, visitor_team, visitor_team_score } = game;
 

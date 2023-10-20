@@ -2,6 +2,7 @@ import React from "react";
 import './PlayerList.css';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { base } from './utils';
 export const PlayerList = ({data, season_data}) => {
     return (
         <>

@@ -48,7 +48,7 @@ th:nth-child(4) { width: 16%; }  /* HEIGHT */
 
 .playerRow:hover {
     transform: scale(1.05);    /* Enlarge the row slightly when hovered */
-    z-index: 1;               /* Make sure the enlarged row appears above its neighbors */
+                 /* Make sure the enlarged row appears above its neighbors */
     box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Enhanced shadow for more depth on hover */
     background-color: #f7f7f7; /* Slight change in background color to give feedback on hover */
 }

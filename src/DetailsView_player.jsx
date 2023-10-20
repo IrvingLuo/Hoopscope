@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import './DetailsView_player.css'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { base } from './utils';
 
 function DetailsViewPlayer(props) {
     const { id } = useParams(); // Get the id from the URL
@@ -103,10 +104,10 @@ const handleNext = () => {
 
             <div className="navigation-buttons">
                 <button onClick={handlePrev} className='navButton leftButton'>
-                    <img src='${base}/resource/left_arrow.png' alt = 'left_arrow'></img>
+                    <img src={`${base}/resource/left_arrow.png`} alt = 'left_arrow'></img>
                     </button>
                 <button onClick={handleNext} className='navButton rightButton'>
-                    <img src='${base}/resource/right_arrow.png' alt = 'right_arrow'></img>
+                    <img src={`${base}/resource/right_arrow.png`} alt = 'right_arrow'></img>
                 </button>
             </div>
 

@@ -149,12 +149,12 @@ const handleNext = () => {
         </Link>
 
      
-        <button className="navButton leftButton" onClick={handlePrev} >
-          <img src='${base}/resource/left_arrow.png' alt = 'left_arrow'></img>
+        <button className="navButton leftButton_gallery" onClick={handlePrev} >
+          <img src={`${base}/resource/left_arrow.png`} alt = 'left_arrow'></img>
         </button>
 
-        <button className="navButton rightButton" onClick={handleNext} >
-          <img src='${base}/resource/right_arrow.png'alt = 'right_arrow'></img>
+        <button className="navButton rightButton_gallery" onClick={handleNext} >
+          <img src={`${base}/resource/right_arrow.png`} alt = 'right_arrow'></img>
         </button>
 
 
