@@ -6,6 +6,8 @@
     height: 100vh;          /* Takes the full viewport height */
     text-decoration: none;
     background-color: #d4d4d4;
+    overflow-y: auto;  /* Allows vertical scrolling */
+    max-height: calc(120vh - 250px);  /* Adjusts max height based on viewport height and some offset */
     
     
     
