@@ -160,7 +160,7 @@ const handleNext = () => {
         
           <div className='Team_board'>
               <div className='logo_name'>
-                  <img src={`/resource/${displayData[index].home_team.id}.png`} alt={displayData[index].home_team.abbreviation} />
+                  <img src={`${base}/resource/${displayData[index].home_team.id}.png`} alt={displayData[index].home_team.abbreviation} />
                   <span>{displayData[index].home_team.name}</span>
               </div>
 
