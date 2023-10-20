@@ -42,5 +42,7 @@
   
   /* background-image: url('/public/resource/'); */
   
-  background-color: #fffcfc;
+  background-color: #e9e9e9;
+  overflow-y: auto;  /* Allows vertical scrolling */
+  max-height: calc(150vh - 250px);  /* Adjusts max height based on viewport height and some offset */
 }
