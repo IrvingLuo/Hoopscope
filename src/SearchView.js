@@ -96,6 +96,39 @@ function SearchView({
     useEffect(() => {
       const fetchQueriedSortedPlayers = async () => {
         try {
+                  // 1. Sort based on the presence of the 'averages' property.
+              function sortByAveragesPresence(data) {
+                return data.sort((a, b) => {
+                    // If a's averages is undefined and b's averages is not, return 1 (a comes after b)
+                    if (!a.averages && b.averages) return 1;
+                    // If b's averages is undefined and a's averages is not, return -1 (a comes before b)
+                    if (a.averages && !b.averages) return -1;
+                    // Otherwise, don't change the order
+                    return 0;
+                });
+              }
+            // 2. Sort based on the 'ppg' (points per game).
+            function sortByPPG(data) {
+              return data.sort((a, b) => {
+                  return isAscending ? (a.averages?.pts || 0) - (b.averages?.pts || 0) : (b.averages?.pts || 0) - (a.averages?.pts || 0);
+              });
+            }
+            // 3. Sort based on the height
+            function sortByHeight(data) {
+              return data.sort((a, b) => {
+                  if(a.height_feet === undefined || a.height_inches === undefined)return 1;
+                  if(b.height_feet === undefined || b.height_inches === undefined)return -1;
+
+
+                  // Convert height to total inches
+                  const heightA = (a.height_feet || 0) * 12 + (a.height_inches || 0);
+                  const heightB = (b.height_feet || 0) * 12 + (b.height_inches || 0);
+          
+                  // If sorting in ascending order
+                  return isAscending ? heightA - heightB : heightB - heightA;
+              });
+          }
+      
   
           
           const playersRes = await axios.get(`https://www.balldontlie.io/api/v1/players?search=${query}&page=0&per_page=40`);
@@ -132,7 +165,7 @@ function SearchView({
         }
         
        
-          sortedPlayers = sortedByTeam(sortedPlayers);
+          // sortedPlayers = sortedByTeam(sortedPlayers);
           
   
           // try to find the team for the player in given season
@@ -163,65 +196,65 @@ function SearchView({
           console.error("Error fetching sortedPlayers:", error);
         }
       };
-      
+
       if (query!=="") {
         fetchQueriedSortedPlayers()
       }else{
         setPlayersData([]);
       }
-    }, [query,season,isAscending, sortType,selectedTeam_search]);
+    }, [query,season,isAscending, sortType,selectedTeam_search, setPlayersData]);
 
     
 
-    // 1. Sort based on the presence of the 'averages' property.
-      function sortByAveragesPresence(data) {
-        return data.sort((a, b) => {
-            // If a's averages is undefined and b's averages is not, return 1 (a comes after b)
-            if (!a.averages && b.averages) return 1;
-            // If b's averages is undefined and a's averages is not, return -1 (a comes before b)
-            if (a.averages && !b.averages) return -1;
-            // Otherwise, don't change the order
-            return 0;
-        });
-      }
-    // 2. Sort based on the 'ppg' (points per game).
-    function sortByPPG(data) {
-      return data.sort((a, b) => {
-          return isAscending ? (a.averages?.pts || 0) - (b.averages?.pts || 0) : (b.averages?.pts || 0) - (a.averages?.pts || 0);
-      });
-    }
-    // 3. Sort based on the height
-    function sortByHeight(data) {
-      return data.sort((a, b) => {
-          if(a.height_feet === undefined || a.height_inches === undefined)return 1;
-          if(b.height_feet === undefined || b.height_inches === undefined)return -1;
+  //   // 1. Sort based on the presence of the 'averages' property.
+  //     function sortByAveragesPresence(data) {
+  //       return data.sort((a, b) => {
+  //           // If a's averages is undefined and b's averages is not, return 1 (a comes after b)
+  //           if (!a.averages && b.averages) return 1;
+  //           // If b's averages is undefined and a's averages is not, return -1 (a comes before b)
+  //           if (a.averages && !b.averages) return -1;
+  //           // Otherwise, don't change the order
+  //           return 0;
+  //       });
+  //     }
+  //   // 2. Sort based on the 'ppg' (points per game).
+  //   function sortByPPG(data) {
+  //     return data.sort((a, b) => {
+  //         return isAscending ? (a.averages?.pts || 0) - (b.averages?.pts || 0) : (b.averages?.pts || 0) - (a.averages?.pts || 0);
+  //     });
+  //   }
+  //   // 3. Sort based on the height
+  //   function sortByHeight(data) {
+  //     return data.sort((a, b) => {
+  //         if(a.height_feet === undefined || a.height_inches === undefined)return 1;
+  //         if(b.height_feet === undefined || b.height_inches === undefined)return -1;
 
 
-          // Convert height to total inches
-          const heightA = (a.height_feet || 0) * 12 + (a.height_inches || 0);
-          const heightB = (b.height_feet || 0) * 12 + (b.height_inches || 0);
+  //         // Convert height to total inches
+  //         const heightA = (a.height_feet || 0) * 12 + (a.height_inches || 0);
+  //         const heightB = (b.height_feet || 0) * 12 + (b.height_inches || 0);
   
-          // If sorting in ascending order
-          return isAscending ? heightA - heightB : heightB - heightA;
-      });
-  }
+  //         // If sorting in ascending order
+  //         return isAscending ? heightA - heightB : heightB - heightA;
+  //     });
+  // }
   
     //4. sortedd by teams
-    function sortedByTeam(data){
-      const temp = data.filter(d => {
+    // function sortedByTeam(data){
+    //   const temp = data.filter(d => {
        
-        if(selectedTeam_search === "")return true;
-        console.log("i am " + d.first_name +" " + d.last_name);
-        console.log("d.id: ");
-        console.log("selectedTeam_search");
-        console.log(selectedTeam_search);
-        return selectedTeam_search === d.matchedGame.team.id || 0;
+    //     if(selectedTeam_search === "")return true;
+    //     console.log("i am " + d.first_name +" " + d.last_name);
+    //     console.log("d.id: ");
+    //     console.log("selectedTeam_search");
+    //     console.log(selectedTeam_search);
+    //     return selectedTeam_search === d.matchedGame.team.id || 0;
         
-      })
-      console.log("temp");
-      console.log(temp);
-      return temp;
-    }
+    //   })
+    //   console.log("temp");
+    //   console.log(temp);
+    //   return temp;
+    // }
 
     // for debug
       useEffect(() => {
