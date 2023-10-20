@@ -19,7 +19,7 @@ function GalleryItem({ game,index }) {
         <div className="game-item">
             <div className="team home-team">
                 <span>H</span>
-                <img src={`/resource/${home_team.id}.png`} alt={home_team.abbreviation} />
+                <img src={`../resource/${home_team.id}.png`} alt={home_team.abbreviation} />
                 <span>{home_team.name}</span>
                 <span className="score">{(home_team_score === 0)?'-':home_team_score}</span>
             </div>
@@ -30,7 +30,7 @@ function GalleryItem({ game,index }) {
 
             <div className="team visitor-team">
                 <span>A</span>
-                <img src={`/resource/${visitor_team.id}.png`} alt={visitor_team.abbreviation} />
+                <img src={`../resource/${visitor_team.id}.png`} alt={visitor_team.abbreviation} />
                 <span>{visitor_team.name}</span>
                 <span className="score">{(visitor_team_score === 0)?'-':visitor_team_score}</span>
                 
