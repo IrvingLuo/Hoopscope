@@ -1,6 +1,6 @@
 import './SearchView.css';
 
-import {  useEffect, useCallback} from 'react';
+import {  useEffect, useCallback, useRef} from 'react';
 import axios from 'axios';
 import { PlayerList } from './PlayerList';
 import PropTypes from 'prop-types';
@@ -12,128 +12,150 @@ function SearchView({
   sortType, setSortType, isAscending, setIsAscending,selectedTeam_search,setSelectedTeam_search, teams }) {
     // console.log("selectedTeam_search, TEAM!!");
     // console.log(selectedTeam_search);
-
+    console.log("I print query at the section after props: " + query);
    
-    console.log(query);
+   
+ 
     // Using useCallback for handleQuery
-    const handleQuery = useCallback((e) => {
+    function handleQuery(e){
       setQuery(e.target.value);
-    }, [setQuery]);
+    };
     // Using useCallback for handleSeasonChange
     const handleSeasonChange = useCallback((e) => {
       setSeason(e.target.value);
     }, [setSeason]);
-    useEffect(() => {
-      const fetchQueriedSortedPlayers = async () => {
-        try {
-                  // 1. Sort based on the presence of the 'averages' property.
-              function sortByAveragesPresence(data) {
-                return data.sort((a, b) => {
-                    // If a's averages is undefined and b's averages is not, return 1 (a comes after b)
-                    if (!a.averages && b.averages) return 1;
-                    // If b's averages is undefined and a's averages is not, return -1 (a comes before b)
-                    if (a.averages && !b.averages) return -1;
-                    // Otherwise, don't change the order
-                    return 0;
-                });
-              }
-            // 2. Sort based on the 'ppg' (points per game).
-            function sortByPPG(data) {
+
+
+
+    const fetchQueriedSortedPlayers = async (cur_query, isAscending, season, sortType) => {   // because inside deboune funto
+      try {
+                // 1. Sort based on the presence of the 'averages' property.
+            function sortByAveragesPresence(data) {
               return data.sort((a, b) => {
-                  return isAscending ? (a.averages?.pts || 0) - (b.averages?.pts || 0) : (b.averages?.pts || 0) - (a.averages?.pts || 0);
+                  // If a's averages is undefined and b's averages is not, return 1 (a comes after b)
+                  if (!a.averages && b.averages) return 1;
+                  // If b's averages is undefined and a's averages is not, return -1 (a comes before b)
+                  if (a.averages && !b.averages) return -1;
+                  // Otherwise, don't change the order
+                  return 0;
               });
             }
-            // 3. Sort based on the height
-            function sortByHeight(data) {
-              return data.sort((a, b) => {
-                  if(a.height_feet === undefined || a.height_inches === undefined)return 1;
-                  if(b.height_feet === undefined || b.height_inches === undefined)return -1;
-
-
-                  // Convert height to total inches
-                  const heightA = (a.height_feet || 0) * 12 + (a.height_inches || 0);
-                  const heightB = (b.height_feet || 0) * 12 + (b.height_inches || 0);
-          
-                  // If sorting in ascending order
-                  return isAscending ? heightA - heightB : heightB - heightA;
-              });
+          // 2. Sort based on the 'ppg' (points per game).
+          function sortByPPG(data) {
+            return data.sort((a, b) => {
+                return isAscending ? (a.averages?.pts || 0) - (b.averages?.pts || 0) : (b.averages?.pts || 0) - (a.averages?.pts || 0);
+            });
           }
-      
-  
-          
-          const playersRes = await axios.get(`https://www.balldontlie.io/api/v1/players?search=${query}&per_page=40`);
-          const players = playersRes.data.data;
-          // Fetch averages for the fetched players
-          const playerIds = players.map(player => player.id);
-          const playerIdsQueryString = playerIds.map(id => `player_ids[]=${id}`).join('&');
-          // console.log("playerIdsQueryString: ");
-          // console.log(playerIdsQueryString);
-          const averagesRes = await axios.get(`https://www.balldontlie.io/api/v1/season_averages?season=${season}&${playerIdsQueryString}`);  
-          const averages = averagesRes.data.data;
-         
-  
-          
-  
-          // Combine player data with their respective averages
-          const processedPlayers = players.map(player=>{
-            const playersAverage = averages.find(average=>average.player_id === player.id);
+          // 3. Sort based on the height
+          function sortByHeight(data) {
+            return data.sort((a, b) => {
+                if(a.height_feet === undefined || a.height_inches === undefined)return 1;
+                if(b.height_feet === undefined || b.height_inches === undefined)return -1;
+
+
+                // Convert height to total inches
+                const heightA = (a.height_feet || 0) * 12 + (a.height_inches || 0);
+                const heightB = (b.height_feet || 0) * 12 + (b.height_inches || 0);
         
-            if(playersAverage){
-              return {...player, averages: playersAverage, playInSelectedSeason: true };
-            }else{
-              return {...player, playInSelectedSeason: false};
-            }
-  
-        })
-        // then do the sorting
-          
-          let sortedPlayers = sortByAveragesPresence(processedPlayers);
-          if (sortType === 'ppg') {
-            sortedPlayers = sortByPPG(sortedPlayers);
-        } else if (sortType === 'height') {
-            sortedPlayers = sortByHeight(sortedPlayers);
+                // If sorting in ascending order
+                return isAscending ? heightA - heightB : heightB - heightA;
+            });
         }
-        
+    
+
+        console.log("before API call, query: " + cur_query);
+        const playersRes = await axios.get(`https://www.balldontlie.io/api/v1/players?search=${cur_query}&per_page=50`);
+        const players = playersRes.data.data;
+
+        // Fetch averages for the fetched players
+        const playerIds = players.map(player => player.id);
+        const playerIdsQueryString = playerIds.map(id => `player_ids[]=${id}`).join('&');
+        // console.log("playerIdsQueryString: ");
+        // console.log(playerIdsQueryString);
+        const averagesRes = await axios.get(`https://www.balldontlie.io/api/v1/season_averages?season=${season}&${playerIdsQueryString}`);  
+        const averages = averagesRes.data.data;
        
-          // sortedPlayers = sortedByTeam(sortedPlayers);
-          
-  
-          // try to find the team for the player in given season
-          const sortedPlayerIds = sortedPlayers.map(player => player.id);
-          const sortedPlayerIdsQueryString = sortedPlayerIds.map(id => `player_ids[]=${id}`).join('&');
-          const statsRes = await axios.get(`https://www.balldontlie.io/api/v1/stats?seasons[]=${season}&per_page=50&${sortedPlayerIdsQueryString}`);  
-          const stats_withTeam = statsRes.data.data;
-          // console.log("stats_withTeam:  ");
-          // console.log(stats_withTeam);
-  
-          const players_withTeams = sortedPlayers.map(player=>{
-            const theMacthedGame = stats_withTeam.find(stat=>stat.player.id === player.id);
-  
-            if(theMacthedGame){
-              return {...player, matchedGame:theMacthedGame };
-            }else{
-              return player;
-            }
-          })
-          
-  
-          setPlayersData(players_withTeams);
-  
-  
-          
-          
-        } catch (error) {
-          console.error("Error fetching sortedPlayers:", error);
-        }
-      };
+
+        
+
+        // Combine player data with their respective averages
+        const processedPlayers = players.map(player=>{
+          const playersAverage = averages.find(average=>average.player_id === player.id);
+      
+          if(playersAverage){
+            return {...player, averages: playersAverage, playInSelectedSeason: true };
+          }else{
+            return {...player, playInSelectedSeason: false};
+          }
+
+      })
+      // then do the sorting
+        
+        let sortedPlayers = sortByAveragesPresence(processedPlayers);
+        if (sortType === 'ppg') {
+          sortedPlayers = sortByPPG(sortedPlayers);
+      } else if (sortType === 'height') {
+          sortedPlayers = sortByHeight(sortedPlayers);
+      }
+      
+     
+        // sortedPlayers = sortedByTeam(sortedPlayers);
+        
+
+        // try to find the team for the player in given season
+        const sortedPlayerIds = sortedPlayers.map(player => player.id);
+        const sortedPlayerIdsQueryString = sortedPlayerIds.map(id => `player_ids[]=${id}`).join('&');
+        const statsRes = await axios.get(`https://www.balldontlie.io/api/v1/stats?seasons[]=${season}&per_page=100&${sortedPlayerIdsQueryString}`);  
+        const stats_withTeam = statsRes.data.data;
+        // console.log("stats_withTeam:  ");
+        // console.log(stats_withTeam);
+
+        const players_withTeams = sortedPlayers.map(player=>{
+          const theMacthedGame = stats_withTeam.find(stat=>stat.player.id === player.id);
+
+          if(theMacthedGame){
+            return {...player, matchedGame:theMacthedGame };
+          }else{
+            return player;
+          }
+        })
+        
+
+        setPlayersData(players_withTeams);
+
+
+        
+        
+      } catch (error) {
+        console.error("Error fetching sortedPlayers:", error);
+      }
+    };
+
+
+    const debouncedFetch = useRef(debounce(fetchQueriedSortedPlayers, 500));
+    useEffect(() => {
+      
 
       if (query!=="") {
-        fetchQueriedSortedPlayers()
+        console.log("juust before debouncedFetch.current(), the query  is " + query);
+        debouncedFetch.current(query, isAscending, season, sortType);
       }else{
         setPlayersData([]);
       }
     }, [query,season,isAscending, sortType,selectedTeam_search, setPlayersData]);
 
+    
+    function debounce(fn, delay) {
+      let timerId;
+      return function (...args) {
+        if (timerId) {
+          clearTimeout(timerId);
+        }
+        timerId = setTimeout(() => {
+          fn(...args);
+        }, delay);
+      };
+    }
     
 
   //   // 1. Sort based on the presence of the 'averages' property.

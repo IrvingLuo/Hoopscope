@@ -63,7 +63,7 @@ function DetailsViewGallery(props) {
     const fetchData = async () => {
       try {
         console.log("inside fetch data");
-        const response = await axios.get(`https://www.balldontlie.io/api/v1/stats?dates=${selectedDate}&game_ids[]=${gameId}&per_page=30`);
+        const response = await axios.get(`https://www.balldontlie.io/api/v1/stats?dates=${selectedDate}&game_ids[]=${gameId}&per_page=100`);
         console.log("response: ");
         console.log(response)
         const sortedStats = response.data.data.sort((a, b) => b.pts - a.pts);

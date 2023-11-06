@@ -23,7 +23,7 @@ function DetailsViewPlayer(props) {
     useEffect(() => {
         async function fetch_SeasonPlayerData() {
             try {
-                const response = await axios.get(`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&seasons[]=${season}&per_page=20`);
+                const response = await axios.get(`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&seasons[]=${season}&per_page=100`);
                 console.log("response from fetch_SeasonPlayerData");
                 console.log(response)
 

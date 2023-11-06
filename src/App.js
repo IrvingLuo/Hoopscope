@@ -30,8 +30,12 @@ function App() {
 
 
   // Gallery state
-  const today = new Date().toISOString().split('T')[0];
-  const [selectedDate, setSelectedDate] = useState(today);
+
+  // Get today's date
+  const today = new Date();
+  today.setDate(today.getDate() - 1);// Subtract one day from today's date
+  const yesterday = today.toISOString().split('T')[0];
+  const [selectedDate, setSelectedDate] = useState(yesterday);
   const [gamesData, setGamesData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
   const [teams, setTeams] = useState([]); // To store all the teams for dropdown
