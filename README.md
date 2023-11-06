@@ -1,3 +1,15 @@
+HoopScope: Dive into the NBA Universe 🏀
+
+Description:
+HoopScope is a dynamic, user-friendly front-end interface developed with React, designed for basketball enthusiasts and NBA followers. Utilizing the balldontlie API, the app provides a seamless experience in exploring detailed player profiles, fetching current NBA game schedules, and more.
+
+Features:
+
+List View: Enter a player's name and get real-time search results. Sort results by player attributes like name or rank. Experience live filtering as you type.
+Gallery View: Visualize the world of NBA with a captivating gallery of player images. Use filters like teams or positions to customize your view.
+Detail View: Click on any player or game to get an in-depth view of stats, profiles, and schedules. Navigate through player details using the intuitive next and previous buttons. Each detail view also has a unique URL for direct access.
+Note: While HoopScope offers a robust experience, the availability depends on the balldontlie API's uptime. In cases of rate-limiting or downtime, certain app features might utilize cached data or show limited results.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
