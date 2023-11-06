@@ -11,7 +11,19 @@ Gallery View: Visualize the world of NBA with a captivating gallery of player im
 
 Detail View: Click on any player or game to get an in-depth view of stats, profiles, and schedules. Navigate through player details using the intuitive next and previous buttons. Each detail view also has a unique URL for direct access.
 
-Note: While HoopScope offers a robust experience, the availability depends on the balldontlie API's uptime. In cases of rate-limiting or downtime, certain app features might utilize cached data or show limited results.
+Note: While HoopScope offers a robust experience, the availability depends on the balldontlie API's uptime. In cases of rate-limiting or downtime, certain app features might utilize cached data or show limited results.\
+
+# Easy Start
+
+In the project directory, you can run:
+
+### `npm install`
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
 
 # Getting Started with Create React App
 
